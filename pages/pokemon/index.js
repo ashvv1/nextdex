@@ -33,9 +33,6 @@ const PokemonList = () => {
        
     }, [pokemonList])
 
-    console.log(pokemonList)
-
-    
 	useEffect(() => {
 		// This forces a rerender, so the date is rendered
 		// the second time but not the first
@@ -52,27 +49,24 @@ const PokemonList = () => {
     }, [filterInput, pokemonList])
 
     const handlePokemonSelect = (name) => {
-        {/*id after /pokemon will trigger [id].js which will render relevant information to that id*/}
+        {/*name after /pokemon will trigger [name].js which will render relevant information to that name*/}
         router.push(`/pokemon/${name}`)
     }
 
     const handleArrowDown = (e) => {
         const activeElement = document.activeElement
         if (e.key == 'ArrowDown') {
-            if (activeElement.tagName === 'INPUT') {
-                console.log('input')
+            if (activeElement.tagName === 'INPUT') {   
                 activeElement.nextSibling.focus()
-
             }
         }
     }
 
-    const selectEnter = (e, url) => {
+    const selectEnter = (e, name) => {
         const activeElement = document.activeElement
         if (e.key == 'Enter') {
-            console.log(activeElement.value)
             if (activeElement.tagName === 'SELECT') {
-                handlePokemonSelect(url)
+                handlePokemonSelect(name)
             }
         }
     }
@@ -110,7 +104,7 @@ const PokemonList = () => {
                             ((filteredList.length > 0) ?
                                 (filteredList.map(pokemon => (
                                     <option key={pokemon.name}
-                                        onClick={() => handlePokemonSelect(pokemon.url)}
+                                        onClick={() => handlePokemonSelect(pokemon.name)}
                                         className={styles.listItem}
                                         value={pokemon.name}
                                     >{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</option>
