@@ -100,7 +100,9 @@ body {
     rgb(var(--background-start-rgb));
 }
 
-
+select {
+  appearance: none;
+}
 
 main {
   display: flex;
