@@ -1,7 +1,8 @@
 import { useRouter } from "next/router";
 import { useEffect, useState, useMemo } from 'react';
 import Head from 'next/head';
-import styles from '../../styles/Pokemon.module.css'
+import styles from '../../styles/Pokemon.module.css';
+import {isMobile} from 'react-device-detect';
 
 const PokemonList = () => {
     const [pokemonList, setPokemonList] = useState([]);
@@ -73,7 +74,14 @@ const PokemonList = () => {
                 </div>
                 <div className={styles.searchGroup}>
                     <input placeholder="...Pokemon Name" onChange={(e) => setFilterInput(e.target.value.toLowerCase())} onKeyDown={(e) => handleArrowDown(e)}></input>
-                    <select name="pokemon" id="pokemon-select" onKeyDown={(e) => selectEnter(e, e.target.value)} className={`${styles.dropdownList} ${filteredList.length < 1 && styles.hidden}`} size={filteredList.length} >
+                    <select 
+                    name="pokemon" 
+                    id="pokemon-select"
+                    onKeyDown={(e) => selectEnter(e, e.target.value)}
+                    className={`${styles.dropdownList} ${filteredList.length < 1 && styles.hidden}`}
+                    size={filteredList.length}
+                    onChange={(e) => isMobile && handlePokemonSelect(e.target.value)}
+                       >
                         {pokemonList.length > 0 &&
                             ((filteredList.length > 0) ?
                                 (filteredList.map(pokemon => (
