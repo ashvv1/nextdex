@@ -49,6 +49,7 @@ const Pokemon = ({ pokemon }) => {
     );
 };
 
+{/*Generated data every time that page is rendered, allows us to use paramater from route*/}
 export const getServerSideProps = async ({ params }) => {
 
     const req = await fetch(`https://pokeapi.co/api/v2/pokemon/${params.id}/`);

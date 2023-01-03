@@ -9,6 +9,7 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   return (
     <>
+    {/*Meta data that is generated for each page using Head element*/}
       <Head>
         <title>NEXT POKEDEX</title>
         <meta name="description" content="A pokedex made using Next.js" />

@@ -33,6 +33,7 @@ const PokemonList = () => {
         const urlArray = url.split("/")
         const pokemonId = urlArray[urlArray.length - 2]
         console.log()
+        {/*id after /pokemon will trigger [id].js which will render relevant information to that id*/}
         router.push(`/pokemon/${pokemonId}`)
     }
 
