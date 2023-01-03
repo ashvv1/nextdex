@@ -60,7 +60,10 @@ const PokemonList = () => {
     return (
         <>
             <Head>
-
+                <title>POKEMON SEARCH</title>
+                <meta name="description" content="A pokedex made using Next.js" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <link rel="icon" href="/favicon.ico" />
             </Head>
             <main className={styles.pokemonPage}>
                 <div className="header">

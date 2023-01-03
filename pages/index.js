@@ -16,7 +16,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <Link href="/pokemon">NEXT.js POKEDEX</Link>
+        <h1 className={styles.header}>NEXT.js POKEDEX</h1>
         <div className={styles.grid}>
           <a
             href="./pokemon"
