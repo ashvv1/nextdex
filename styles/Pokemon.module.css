@@ -1,31 +1,132 @@
-.main{
-  justify-content: space-evenly;
+.pokemonPage{
+  justify-content: flex-start;
+}
+
+
+.dropdownList{
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  max-height: 50vh;
+  width: 100%;
+  overflow-y: auto;
+  background-color:#ffffff;
+}
+
+.pokemonCard{
+  height: 70vh;
+  width: 30%;
+  margin-top: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+}
+
+.cardSection{
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+  width: 100%;
+  height: auto;
+  flex-wrap:wrap;
+  display: flex;
+}
+
+.listItem{
+  border-bottom: 1px solid grey;
+  cursor: pointer;
+}
+
+.listItem:hover{
+  background-color: black;
+  color: white;
+}
+
+.electric{
+  background-color: yellow;
+}
+
+.water{
+  background-color: rgba(53, 53, 255, 0.501);
+}
+
+.fire{
+  background-color: rgba(250, 118, 74, 0.745);
+}
+
+.bug{
+  background-color: rgba(0, 128, 0, 0.752);
+}
+
+.grass{
+  background-color: rgba(120, 190, 120, 0.766);
+}
+
+.normal{
+  background-color: rgba(75, 18, 18, 0.114);
+}
+
+.poison{
+  background-color: rgba(200, 29, 200, 0.437);
+}
+
+.fairy{
+  background-color: rgba(255, 192, 203, 0.631);
+}
+
+.ground{
+  background-color: rgba(255, 179, 0, 0.517);
+}
+
+.ghost{
+  background-color: rgba(110, 95, 121, 0.802) ;
+}
+
+.psychic{
+  background-color: rgba(128, 128, 128, 0.702);
+}
+
+.searchGroup{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+  width: 40%;
+  margin-top: 15vh;
+}
+
+.icon{
+  width: min(20vh, 20vw);
+  height: auto;
+  border: solid black .2em;
+}
+
+.iconSection{
+  display: flex;
+  justify-content: center;
 }
 
 .description {
-  display: inherit;
-  justify-content: inherit;
-  align-items: inherit;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
   font-size: 0.85rem;
-  max-width: var(--max-width);
   width: 100%;
-  z-index: 2;
   font-family: var(--font-mono);
 }
 
-.card a {
+.description a {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 0.5rem;
 }
 
-.card p {
-  position: relative;
-  margin: 0;
-  font-size: 60%;
-  background-color: rgba(var(--callout-rgb), 0.5);
-  border: 1px solid rgba(var(--callout-border-rgb), 0.3);
-  border-radius: var(--border-radius);
+.ability{
+  font-size: 70%;
+  font-family: var(--font-mono);
 }
 
 .code {
@@ -34,17 +135,14 @@
 }
 
 .grid {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: center;
-  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(25%, auto));
+  width: var(--max-width);
+  max-width: 100%;
 }
 
 .card {
-  cursor: pointer;
-  padding: .5em;
-  width: 50%;
+  padding: 1rem 1.2rem;
   border-radius: var(--border-radius);
   background: rgba(var(--card-rgb), 0);
   border: 1px solid rgba(var(--card-border-rgb), 0);
@@ -74,6 +172,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  padding: 4rem 0;
 }
 
 .center::before {
