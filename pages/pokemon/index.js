@@ -7,6 +7,7 @@ import {isMobile} from 'react-device-detect';
 const PokemonList = () => {
     const [pokemonList, setPokemonList] = useState([]);
     const [filterInput, setFilterInput] = useState("");
+    const [hydrated, setHydrated] = useState(false);
 
     const router = useRouter()
 
@@ -20,6 +21,13 @@ const PokemonList = () => {
         }
 
     }, [pokemonList])
+
+    
+	useEffect(() => {
+		// This forces a rerender, so the date is rendered
+		// the second time but not the first
+		setHydrated(true);
+	}, []);
 
     const filteredList = useMemo(() => {
         if (pokemonList.length > 1) {
@@ -59,6 +67,11 @@ const PokemonList = () => {
         }
     }
 
+    if (!hydrated) {
+		// Returns null on first render, so the client and server match
+		return null;
+	}
+
     return (
         <>
             <Head>
@@ -74,6 +87,7 @@ const PokemonList = () => {
                 </div>
                 <div className={styles.searchGroup}>
                     <input placeholder="...Pokemon Name" onChange={(e) => setFilterInput(e.target.value.toLowerCase())} onKeyDown={(e) => handleArrowDown(e)}></input>
+                    {!isMobile ? (
                     <select 
                     name="pokemon" 
                     id="pokemon-select"
@@ -95,7 +109,24 @@ const PokemonList = () => {
                             )
                         }
                     </select>
-
+                    ) :
+                    (
+                    <div 
+                className={`${styles.dropdownList} ${filteredList.length < 1 && styles.hidden}`}
+                    >
+                    {pokemonList.length > 0 &&
+                        ((filteredList.length > 0) ?
+                            (filteredList.map(pokemon => (
+                                <div key={pokemon.name}
+                                    onClick={() => handlePokemonSelect(pokemon.url)}
+                                    className={styles.listItem}
+                                >{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</div>
+                            ))) :
+                            (<div>No Match</div>)
+                        )
+                    }
+                </div>
+                    )}
                 </div>
             </main>
 
