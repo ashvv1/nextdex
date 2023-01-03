@@ -2,7 +2,6 @@
   justify-content: flex-start;
 }
 
-
 .dropdownList {
   display: flex;
   flex-direction: column;
@@ -153,15 +152,6 @@
   }
 }
 
-@media (prefers-reduced-motion) {
-  .thirteen::before {
-    animation: none;
-  }
-
-  .card:hover span {
-    transform: none;
-  }
-}
 
 /* Mobile */
 @media (max-aspect-ratio: 1/1) {
