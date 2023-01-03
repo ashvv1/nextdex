@@ -6,7 +6,6 @@ import styles from '../../styles/Pokemon.module.css'
 const Pokemon = ({ pokemon }) => {
 
     const router = useRouter();
-    // const { id } = router.query;
     const element = pokemon.types[0].type.name;
 
     return (
@@ -49,10 +48,10 @@ const Pokemon = ({ pokemon }) => {
     );
 };
 
-{/*Generated data every time that page is rendered, allows us to use paramater from route*/}
+{/*generates data every time that page is rendered, allows us to use paramater from route*/}
 export const getServerSideProps = async ({ params }) => {
 
-    const req = await fetch(`https://pokeapi.co/api/v2/pokemon/${params.id}/`);
+    const req = await fetch(`https://pokeapi.co/api/v2/pokemon/${params.name}/`);
     const data = await req.json();
 
     return {

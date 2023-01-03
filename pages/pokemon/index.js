@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState, useMemo } from 'react';
+import cache from "memory-cache";
 import Head from 'next/head';
 import styles from '../../styles/Pokemon.module.css';
 import {isMobile} from 'react-device-detect';
@@ -11,16 +12,28 @@ const PokemonList = () => {
 
     const router = useRouter()
 
-    useEffect(() => {
-        if (pokemonList.length < 1) {
-            fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=2000')
-                .then((res) => res.json())
-                .then((data) => {
-                    setPokemonList(data.results.flat())
-                })
+    useEffect( () => {
+        const fetchPokeData = async () => {
+            const url = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=2000'
+            if (pokemonList.length < 1) {
+                const pokemonData = cache.get(url)
+                if(pokemonData){
+                    setPokemonList(pokemonData);
+                }else{
+                    const hours = 24;
+                    const response = await fetch(url);
+                    const data = await response.json();
+                    cache.put(url, data.results.flat(), hours * 1000 * 60 * 60);
+                    setPokemonList(data.results.flat());
+                }    
+            }
         }
 
+        fetchPokeData();
+       
     }, [pokemonList])
+
+    console.log(pokemonList)
 
     
 	useEffect(() => {
@@ -38,12 +51,9 @@ const PokemonList = () => {
 
     }, [filterInput, pokemonList])
 
-    const handlePokemonSelect = (url) => {
-        const urlArray = url.split("/")
-        const pokemonId = urlArray[urlArray.length - 2]
-        console.log()
+    const handlePokemonSelect = (name) => {
         {/*id after /pokemon will trigger [id].js which will render relevant information to that id*/}
-        router.push(`/pokemon/${pokemonId}`)
+        router.push(`/pokemon/${name}`)
     }
 
     const handleArrowDown = (e) => {
@@ -102,7 +112,7 @@ const PokemonList = () => {
                                     <option key={pokemon.name}
                                         onClick={() => handlePokemonSelect(pokemon.url)}
                                         className={styles.listItem}
-                                        value={pokemon.url}
+                                        value={pokemon.name}
                                     >{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</option>
                                 ))) :
                                 (<option>No Match</option>)
@@ -118,7 +128,7 @@ const PokemonList = () => {
                         ((filteredList.length > 0) ?
                             (filteredList.map(pokemon => (
                                 <div key={pokemon.name}
-                                    onClick={() => handlePokemonSelect(pokemon.url)}
+                                    onClick={() => handlePokemonSelect(pokemon.name)}
                                     className={styles.listItem}
                                 >{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</div>
                             ))) :
