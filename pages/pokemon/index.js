@@ -42,6 +42,7 @@ const PokemonList = () => {
             if (activeElement.tagName === 'INPUT') {
                 console.log('input')
                 activeElement.nextSibling.focus()
+
             }
         }
     }
