@@ -9,15 +9,15 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   return (
     <>
-     <Head>
+      <Head>
         <title>NEXT POKEDEX</title>
         <meta name="description" content="A pokedex made using Next.js" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-      <Link href="/pokemon">NEXT.js POKEDEX</Link>
-      <div className={styles.grid}>
+        <Link href="/pokemon">NEXT.js POKEDEX</Link>
+        <div className={styles.grid}>
           <a
             href="./pokemon"
             className={styles.card}
